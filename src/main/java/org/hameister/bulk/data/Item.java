@@ -1,6 +1,7 @@
 package org.hameister.bulk.data;
 
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * Created by hameister on 01.12.17.
@@ -10,6 +11,8 @@ import javax.persistence.*;
 public class Item {
 
     @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")    
     String id;
 
     @Column(name = "description")
