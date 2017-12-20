@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by hameister on 18.12.17.
@@ -15,21 +15,16 @@ import java.util.List;
 @Service
 public class BulkImporterService {
 
-    private EntityManagerFactory emf;
+    private final EntityManager entityManager;
 
-    @Autowired
-    public BulkImporterService(EntityManagerFactory emf) {
-        Assert.notNull(emf, "EntityManagerFactory must not be null");
-        this.emf = emf;
+    public BulkImporterService(EntityManager emf) {
+        Assert.notNull(emf, "EntityManager must not be null");
+        this.entityManager = emf;
     }
 
+    @Transactional
     public List<Item> bulkWithEntityManager(List<Item> items) {
-            EntityManager entityManager = emf.createEntityManager();
-            entityManager.getTransaction().begin();
             items.forEach(item -> entityManager.persist(item));
-            entityManager.getTransaction().commit();
-            entityManager.close();
-
             return items;
     }
 }
