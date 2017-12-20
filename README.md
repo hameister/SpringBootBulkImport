@@ -6,7 +6,7 @@ This example shows how to use Bulk und Batch imports in Spring Boot.
 
 
 # Description
-Further descriptions of the source code can be found here: [Bulk and Batch imports with Spring Boot](www.hameister.org/SpringBootHibernateBulkImport.html).
+Further descriptions of the source code can be found here: [Bulk and Batch imports with Spring Boot](http://www.hameister.org/SpringBootHibernateBulkImport.html).
 
 
 # Disclaimer
