@@ -1,18 +1,16 @@
 package org.hameister.bulk.data;
 
 import javax.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.domain.Persistable;
 
 /**
  * Created by hameister on 01.12.17.
  */
 @Entity
 @Table(name = "Item")
-public class Item {
+public class Item implements Persistable<String> {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")    
     String id;
 
     @Column(name = "description")
@@ -20,10 +18,23 @@ public class Item {
 
     @Column(name = "location")
     private String location;
+    
+    private @Transient boolean isNew = true;
 
     public Item() {
     }
+    
+    @PostPersist
+    @PostLoad
+    void markNotNew() {
+        this.isNew = false;
+    }
 
+    @Override
+    public boolean isNew() {
+        return isNew;
+    }
+    
     public String getId() {
         return id;
     }

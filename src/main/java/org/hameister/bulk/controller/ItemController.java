@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by hameister on 02.12.17.
@@ -54,7 +55,8 @@ public class ItemController {
         String date = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
         List<Item> items = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            Item item = new Item();          
+            Item item = new Item();
+            item.setId(UUID.randomUUID().toString());
             item.setLocation("Board");
             item.setDescription("Item " + i + "IT:" + date);
             items.add(item);
